@@ -7,28 +7,99 @@
 	<style type="text/css">
 		body{
 			text-align: center;
-			padding: 18%;
-			background:url("https://www.solidbackgrounds.com/images/2560x1440/2560x1440-deep-sky-blue-solid-color-background.jpg")fixed no-repeat;
-			background-size:cover;		
+			
+			background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOo7vNxrI8772n8Zlcq5XvCIIx9yJub-KTtw&usqp=CAU),fixed;
+			background-repeat:no-repeat;
+			background-size:cover;
 		}
+		#data{
+			padding:0.9%;
+			border-radius: 25px;
+			font-style: normal;
+			color: black;
+
+		}
+		#password{
+			padding:0.9%;
+			border-radius: 25px;
+			font-style: normal;
+			color: black;
+
+		}
+		.btn{
+			padding:0.8%;
+			border-style:radius ;
+			font-style: normal;
+			color: black;
+
+
+		}
+		.head{
+			color: black;
+		}
+		.group{
+			padding: 15%;
+		}
+		#course{
+			padding:1%;
+			border-radius: 30px;
+			font-style: normal;
+			color: black;
+			width: 15%;
+		}
+		#male{
+			font-size: 15px;
+		}
+		#female{
+			font-size: 15px;
+		}
+		.input{
+				font-size:15px;
+				color:black;
+		}
+
 	</style>
 </head>
 <body>
+	<h1 class="head"><b>Registration page</b></h1>
+	<div class="group">
+	
 	<p><input placeholder="enter data"id="data"/></p>
 	<p><input placeholder="enter data"id="password"/></p>
+	<p>
+		<select id="course">
+		<option value="select course">select course</option>
+		<option value="mpc">mpc</option>
+		<option value="mec">mec</option>
+		<option value="bipc">bipc</option>
+		</select>
+		
+	</p>
+	<p class="input">
+		<input type="radio" value="Male" name="gender" id="male"/>male
+	<input type="radio" value="Female" name="gender" id="female"/>female</p>
+
+
 	<button class="btn"onclick="data()">submit</button>
+</div>
 	<script type="text/javascript">
 		
 		function data(){
 			var data=document.getElementById("data").value
 			var password=document.getElementById("password").value
-			console.log(data,password)
+			
+			var course=document.getElementById("course").value
+			var gMale=document.getElementById("male").checked
+			var gFemale=document.getElementById("female").checked
+			if(gMale==true) var gender="male"
+			else var gender="female"
+            console.log(data,password,course,gender)
 			fetch("http://localhost:3000/newData",{
 			method:"POST",
 			headers:{				
 			"Content-Type":"application/json"
 			},
-			body:JSON.stringify({name:data,password:password})
+			body:JSON.stringify({name:data,password:password,course:course,gender:gender})
 		})
 			.then((res)=>{
 				console.log(res)
